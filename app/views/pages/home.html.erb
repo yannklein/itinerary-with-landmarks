@@ -1,2 +1,24 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+<div 
+  data-controller="map" 
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  data-map-itinerary-id-value="<%= @itinerary.id %>"
+  >
+
+<div style="width: 100%; height: 300px;"
+  data-map-target="mapElement"
+></div>
+
+  <label for="addLandmark">Add Landmark</label>
+  <input data-action="click->map#addLandmark" type="checkbox" name="addLandmark" id="add-landmark">
+
+<h2>Landmarks:</h2>
+<ul data-map-target="landmarks">
+  <% @itinerary.landmarks.each do |landmark| %>
+    <%= render 'landmarks/landmark_card', landmark: landmark %>
+  <% end %>
+</ul>
+
+</div>
